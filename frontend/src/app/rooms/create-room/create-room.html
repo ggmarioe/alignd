@@ -1,0 +1,102 @@
+<div class="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+  <div class="w-full max-w-md">
+
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold text-gray-900 tracking-tight">Alignd</h1>
+      <p class="text-gray-500 mt-1 text-sm">Real-time sprint planning poker</p>
+    </div>
+
+    @if (!result()) {
+
+      <div class="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
+        <h2 class="text-lg font-semibold text-gray-900 mb-6">New Room</h2>
+
+        <span class="block text-xs text-gray-400 uppercase tracking-wider mb-3">Voting style</span>
+        <div class="grid grid-cols-2 gap-2 mb-6">
+
+          <button type="button" (click)="selectVoteType(0)"
+            class="rounded-xl border px-4 py-3 text-sm font-medium text-left transition-colors"
+            [class.bg-violet-600]="form.controls.voteType.value === 0"
+            [class.border-violet-600]="form.controls.voteType.value === 0"
+            [class.text-white]="form.controls.voteType.value === 0"
+            [class.bg-white]="form.controls.voteType.value !== 0"
+            [class.border-gray-200]="form.controls.voteType.value !== 0"
+            [class.text-gray-700]="form.controls.voteType.value !== 0">
+            Fibonacci
+            <span class="block text-xs opacity-60 mt-0.5">1 · 2 · 3 · 5 · 8 · 13</span>
+          </button>
+
+          <button type="button" (click)="selectVoteType(1)"
+            class="rounded-xl border px-4 py-3 text-sm font-medium text-left transition-colors"
+            [class.bg-violet-600]="form.controls.voteType.value === 1"
+            [class.border-violet-600]="form.controls.voteType.value === 1"
+            [class.text-white]="form.controls.voteType.value === 1"
+            [class.bg-white]="form.controls.voteType.value !== 1"
+            [class.border-gray-200]="form.controls.voteType.value !== 1"
+            [class.text-gray-700]="form.controls.voteType.value !== 1">
+            Shirt Size
+            <span class="block text-xs opacity-60 mt-0.5">XS · S · M · L · XL</span>
+          </button>
+
+        </div>
+
+        @if (error()) {
+          <p class="text-red-600 text-sm mb-4 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+            {{ error() }}
+          </p>
+        }
+
+        <button type="button" (click)="submit()" [disabled]="loading()"
+          class="w-full py-3 rounded-xl bg-violet-600 hover:bg-violet-500 active:bg-violet-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold text-sm transition-colors">
+          @if (loading()) { Creating… } @else { Create Room }
+        </button>
+      </div>
+
+    } @else {
+
+      <div class="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
+
+        <div class="text-center mb-8">
+          <p class="text-xs text-gray-400 uppercase tracking-widest mb-2">Room created</p>
+          <p class="text-3xl font-bold text-gray-900 tracking-[.2em]">{{ result()!.roomCode }}</p>
+        </div>
+
+        <div class="mb-4">
+          <span class="block text-xs text-gray-400 uppercase tracking-wider mb-2">Admin link</span>
+          <div class="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5">
+            <span class="text-gray-600 text-xs truncate flex-1 font-mono">{{ adminLink() }}</span>
+            <button (click)="copy('admin')"
+              class="text-xs font-medium shrink-0 transition-colors"
+              [class.text-green-600]="copied() === 'admin'"
+              [class.text-violet-600]="copied() !== 'admin'">
+              {{ copied() === 'admin' ? 'Copied!' : 'Copy' }}
+            </button>
+          </div>
+          <p class="text-xs text-gray-400 mt-1">Keep private — this token grants admin access</p>
+        </div>
+
+        <div>
+          <span class="block text-xs text-gray-400 uppercase tracking-wider mb-2">Player link</span>
+          <div class="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5">
+            <span class="text-gray-600 text-xs truncate flex-1 font-mono">{{ playerLink() }}</span>
+            <button (click)="copy('player')"
+              class="text-xs font-medium shrink-0 transition-colors"
+              [class.text-green-600]="copied() === 'player'"
+              [class.text-violet-600]="copied() !== 'player'">
+              {{ copied() === 'player' ? 'Copied!' : 'Copy' }}
+            </button>
+          </div>
+          <p class="text-xs text-gray-400 mt-1">Share this with your team</p>
+        </div>
+
+        <button (click)="reset()"
+          class="w-full mt-6 py-3 rounded-xl border border-gray-200 hover:border-gray-300 text-gray-500 hover:text-gray-700 text-sm font-medium transition-colors">
+          Create another room
+        </button>
+
+      </div>
+
+    }
+
+  </div>
+</div>
