@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# pre-commit hook: enforces 90% test coverage when backend files are staged.
+
+set -uo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+# Check whether any staged file belongs to the backend.
+BACKEND_STAGED=$(git diff --cached --name-only | grep -E '^(src/Alignd|test/Alignd)' || true)
+
+if [ -z "$BACKEND_STAGED" ]; then
+    # No backend files staged — nothing to check.
+    exit 0
+fi
+
+echo ""
+echo "Backend files detected in staged changes."
+"$SCRIPT_DIR/_coverage_check.sh"

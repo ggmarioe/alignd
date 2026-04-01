@@ -9,8 +9,9 @@ obj/
 # Rider
 .idea/
 
-# Environment / secrets
+# Environment / secrets — never commit real credentials
 appsettings.Production.json
+appsettings.Local.json
 *.pfx
 
 # EF migrations (keep the folder, ignore generated files if needed)
@@ -23,3 +24,5 @@ dist/
 # OS
 .DS_Store
 Thumbs.db
+appsettingss.json
+appsettingss*.json

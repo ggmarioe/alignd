@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# pre-push hook: enforces 90% test coverage when pushed commits touch the backend.
+
+set -uo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+HAS_BACKEND_CHANGES=false
+
+# Git passes push refs on stdin: <local_ref> <local_sha> <remote_ref> <remote_sha>
+while IFS=' ' read -r local_ref local_sha remote_ref remote_sha; do
+    # Skip branch deletions (local_sha is all zeros).
+    if [ "$local_sha" = "0000000000000000000000000000000000000000" ]; then
+        continue
+    fi
+
+    if [ "$remote_sha" = "0000000000000000000000000000000000000000" ]; then
+        # New remote branch — compare against the empty tree so we see all files.
+        EMPTY_TREE="4b825dc642cb6eb9a060e54bf8d69288fbee4904"
+        FILES=$(git diff --name-only "$EMPTY_TREE" "$local_sha" 2>/dev/null | grep -E '^(src/Alignd|test/Alignd)' || true)
+    else
+        FILES=$(git diff --name-only "$remote_sha" "$local_sha" 2>/dev/null | grep -E '^(src/Alignd|test/Alignd)' || true)
+    fi
+
+    if [ -n "$FILES" ]; then
+        HAS_BACKEND_CHANGES=true
+        break
+    fi
+done
+
+if [ "$HAS_BACKEND_CHANGES" = false ]; then
+    echo "No backend changes in the push — skipping coverage check."
+    exit 0
+fi
+
+echo ""
+echo "Backend files detected in pushed commits."
+"$SCRIPT_DIR/_coverage_check.sh"
