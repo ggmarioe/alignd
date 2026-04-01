@@ -1,8 +1,10 @@
+using System.Diagnostics.CodeAnalysis;
 using Alignd.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Alignd.Infrastructure.Persistence;
 
+[ExcludeFromCodeCoverage(Justification = "EF Core DbContext — no business logic to unit-test.")]
 public sealed class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     public DbSet<Room>        Rooms        => Set<Room>();

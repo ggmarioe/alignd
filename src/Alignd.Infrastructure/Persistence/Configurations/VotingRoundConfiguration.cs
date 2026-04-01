@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Alignd.Domain.Entities;
 using Alignd.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
@@ -5,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Alignd.Infrastructure.Persistence.Configurations;
 
+[ExcludeFromCodeCoverage(Justification = "EF Core entity configuration — no business logic to unit-test.")]
 public sealed class VotingRoundConfiguration : IEntityTypeConfiguration<VotingRound>
 {
     public void Configure(EntityTypeBuilder<VotingRound> builder)

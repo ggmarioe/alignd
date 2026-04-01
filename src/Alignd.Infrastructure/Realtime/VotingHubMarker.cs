@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.SignalR;
 
 namespace Alignd.Infrastructure.Realtime;
@@ -7,4 +8,5 @@ namespace Alignd.Infrastructure.Realtime;
 /// without creating a dependency on the API layer.
 /// VotingHub in the API project inherits from this class.
 /// </summary>
+[ExcludeFromCodeCoverage(Justification = "SignalR hub marker — no logic, only used for typed IHubContext.")]
 public abstract class VotingHubMarker : Hub;

@@ -1,8 +1,10 @@
+using System.Diagnostics.CodeAnalysis;
 using Alignd.Application.Interfaces;
 using Microsoft.AspNetCore.SignalR;
 
 namespace Alignd.Infrastructure.Realtime;
 
+[ExcludeFromCodeCoverage(Justification = "SignalR pass-through — requires a live hub; covered by integration tests.")]
 public sealed class SignalRRoomNotifier(IHubContext<VotingHubMarker> hub) : IRoomNotifier
 {
     public Task NotifyUserJoined(string roomCode, UserJoinedPayload payload) =>
