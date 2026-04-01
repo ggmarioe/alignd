@@ -1,0 +1,25 @@
+# Build output
+bin/
+obj/
+*.user
+.vs/
+
+.vscode
+
+# Rider
+.idea/
+
+# Environment / secrets
+appsettings.Production.json
+*.pfx
+
+# EF migrations (keep the folder, ignore generated files if needed)
+# src/Alignd.Infrastructure/Persistence/Migrations/
+
+# Node (for future frontend)
+node_modules/
+dist/
+
+# OS
+.DS_Store
+Thumbs.db
