@@ -1,9 +1,11 @@
 using System.Collections.Frozen;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Alignd.Application.Interfaces;
 
 namespace Alignd.Infrastructure.Profanity;
 
+[ExcludeFromCodeCoverage(Justification = "Loads word list from an embedded resource at runtime; the filtering logic is tested through JoinRoomHandler via a mocked IProfanityFilter.")]
 public sealed class EmbeddedProfanityFilter : IProfanityFilter
 {
     private readonly FrozenSet<string> _words;
