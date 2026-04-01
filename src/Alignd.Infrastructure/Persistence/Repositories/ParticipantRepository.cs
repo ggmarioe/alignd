@@ -1,9 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
 using Alignd.Application.Interfaces;
 using Alignd.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Alignd.Infrastructure.Persistence.Repositories;
 
+[ExcludeFromCodeCoverage(Justification = "EF Core repository — requires a real database; covered by integration tests.")]
 public sealed class ParticipantRepository(AppDbContext db) : IParticipantRepository
 {
     public Task<Participant?> GetByIdAsync(Guid id, CancellationToken ct) =>

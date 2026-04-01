@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Alignd.Application.Interfaces;
 using Alignd.Infrastructure.Auth;
 using Alignd.Infrastructure.Persistence;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Alignd.Infrastructure;
 
+[ExcludeFromCodeCoverage(Justification = "DI wiring — no business logic to test.")]
 public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(
