@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Alignd.Application</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Alignd.SharedKernel\Alignd.SharedKernel.csproj" />
+    <ProjectReference Include="..\Alignd.Domain\Alignd.Domain.csproj" />
+  </ItemGroup>
+</Project>
