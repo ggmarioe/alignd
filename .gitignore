@@ -12,6 +12,8 @@ obj/
 # Environment / secrets — never commit real credentials
 appsettings.Production.json
 appsettings.Local.json
+src/Alignd.API/appsettings.json
+src/Alignd.API/appsettings.Development.json
 *.pfx
 
 # EF migrations (keep the folder, ignore generated files if needed)
@@ -24,5 +26,5 @@ dist/
 # OS
 .DS_Store
 Thumbs.db
-appsettings.json
+./appsettings.json
 appsettings.*.json
