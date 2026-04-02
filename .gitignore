@@ -33,3 +33,6 @@ coverage.*.xml
 
 # Claude Code local settings — machine-specific, keep private
 settings.local.json
+test-*.png
+.playwright-mcp/
+*.png
