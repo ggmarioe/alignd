@@ -1,0 +1,34 @@
+<section
+  class="flex flex-col gap-3 rounded-xl border border-gray-200 bg-white p-4 shadow-sm h-full"
+  aria-label="User list"
+>
+  <h2 class="text-base font-semibold text-gray-900">User List</h2>
+
+  @if (votesRevealed()) {
+    <app-vote-chart [participants]="displayedParticipants()" />
+  }
+
+  <ul class="flex flex-col divide-y divide-gray-100 flex-1" role="list">
+    @for (participant of displayedParticipants(); track participant.id) {
+      <li>
+        <app-participant-row
+          [participant]="participant"
+          [isCurrentUserAdmin]="isCurrentUserAdmin()"
+          [isSelf]="participant.id === currentUserId()"
+          [canReveal]="canReveal()"
+          [votesRevealed]="votesRevealed()"
+          (revealVotes)="revealVotes.emit()"
+          (changeAdmin)="changeAdmin.emit()"
+        />
+      </li>
+    }
+  </ul>
+
+  @if (!isAdminPresent()) {
+    <div class="pt-3 border-t border-gray-100">
+      <app-action-button variant="secondary" (click)="takeAdmin.emit()">
+        Take admin
+      </app-action-button>
+    </div>
+  }
+</section>

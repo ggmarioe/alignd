@@ -1,0 +1,18 @@
+<div class="flex flex-col gap-6">
+  <app-work-item-card
+    [title]="workItemTitle()"
+    [currentVote]="currentVote()"
+    [voteType]="voteType()"
+  />
+
+  <div>
+    <p class="text-sm font-medium text-gray-600 mb-3" id="card-deck-label">
+      Select your estimate
+    </p>
+    <app-voting-card-deck
+      [voteType]="voteType()"
+      [currentVote]="currentVote()"
+      (voteSelected)="voteSelected.emit($event)"
+    />
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="flex flex-wrap gap-2" role="group" aria-label="Voting cards">
+  @for (card of cards(); track card) {
+    <app-voting-card
+      [label]="card"
+      [selected]="currentVote() === card"
+      (select)="voteSelected.emit($event)"
+    />
+  }
+</div>

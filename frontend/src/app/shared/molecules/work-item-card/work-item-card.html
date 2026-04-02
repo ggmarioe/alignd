@@ -1,0 +1,18 @@
+<div class="flex flex-col gap-4">
+  <h1 class="text-xl font-semibold text-gray-900">
+    {{ title() || 'No work item selected' }}
+  </h1>
+
+  <div
+    class="flex items-center justify-center rounded-xl border-2 border-gray-200 bg-white w-full max-w-xs aspect-[3/4] shadow-sm"
+    aria-label="Current vote"
+  >
+    @if (currentVote()) {
+      <span class="text-5xl font-bold text-indigo-600">{{ currentVote() }}</span>
+    } @else {
+      <span class="text-lg text-gray-400">
+        {{ voteType() === 0 ? 'Card number' : 'T-Shirt size' }}
+      </span>
+    }
+  </div>
+</div>
