@@ -30,3 +30,6 @@ Thumbs.db
 appsettings.*.json
 
 coverage.*.xml
+
+# Claude Code local settings — machine-specific, keep private
+settings.local.json
