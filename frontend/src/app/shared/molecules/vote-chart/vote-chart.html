@@ -1,0 +1,37 @@
+<div class="rounded-lg border border-gray-200 bg-gray-50 p-3" role="region" aria-label="Vote distribution chart">
+  <p class="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-3">Vote Distribution</p>
+
+  <div class="flex items-end gap-1" style="height: 96px" aria-hidden="true">
+    @for (bar of chartData(); track bar.value) {
+      <div class="flex flex-col items-center gap-0.5 flex-1 min-w-0">
+        <span class="text-xs font-semibold" [class]="bar.isTop ? 'text-emerald-700' : 'text-indigo-600'">
+          {{ bar.count }}
+        </span>
+        <div
+          class="w-full rounded-t-sm transition-all duration-300"
+          [class]="bar.isTop ? 'bg-emerald-500' : 'bg-indigo-400'"
+          [style.height.px]="(bar.count / maxCount()) * 64"
+          [attr.title]="bar.value + ': ' + bar.count + ' vote(s)'"
+        ></div>
+      </div>
+    }
+  </div>
+
+  <div class="flex gap-1 mt-1">
+    @for (bar of chartData(); track bar.value) {
+      <span
+        class="flex-1 min-w-0 text-center text-xs truncate"
+        [class]="bar.isTop ? 'font-semibold text-emerald-700' : 'text-gray-500'"
+      >
+        {{ bar.value }}
+      </span>
+    }
+  </div>
+
+  <!-- screen-reader accessible summary -->
+  <ul class="sr-only">
+    @for (bar of chartData(); track bar.value) {
+      <li>{{ bar.value }}: {{ bar.count }} vote(s){{ bar.isTop ? ' — most selected' : '' }}</li>
+    }
+  </ul>
+</div>

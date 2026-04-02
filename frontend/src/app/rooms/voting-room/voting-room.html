@@ -1,0 +1,32 @@
+<main class="min-h-screen bg-gray-50 p-6">
+  <div class="max-w-6xl mx-auto flex flex-col gap-6">
+  <header class="flex items-center justify-between">
+    <h1 class="text-lg font-semibold text-gray-900">Room: {{ roomCode }}</h1>
+    <div class="flex gap-2">
+      <app-action-button variant="secondary" (click)="onRefreshChannel()">Refresh</app-action-button>
+      <app-action-button variant="danger" (click)="onLogout()">Logout</app-action-button>
+    </div>
+  </header>
+
+  <div class="grid grid-cols-[2fr_1fr] gap-6 items-start">
+    <app-voting-panel
+      [workItemTitle]="workItemTitle()"
+      [voteType]="voteType()"
+      [currentVote]="currentVote()"
+      (voteSelected)="onVoteSelected($event)"
+    />
+
+    <app-participants-panel
+      [participants]="participants()"
+      [isAdminPresent]="isAdminPresent()"
+      [isCurrentUserAdmin]="isCurrentUserAdmin()"
+      [currentUserId]="currentUserId()"
+      [currentVote]="currentVote()"
+      [votesRevealed]="isVotesRevealed()"
+      (revealVotes)="onRevealVotes()"
+      (changeAdmin)="onChangeAdmin()"
+      (takeAdmin)="onTakeAdmin()"
+    />
+  </div>
+  </div>
+</main>
