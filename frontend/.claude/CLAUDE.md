@@ -53,3 +53,15 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Design services around a single responsibility
 - Use the `providedIn: 'root'` option for singleton services
 - Use the `inject()` function instead of constructor injection
+
+## Testing
+
+- Use **Vitest** as the test runner. Never use Karma or Jasmine.
+- Use **Angular Testing Library** (`@testing-library/angular`) for all component tests.
+- Use `render(Component, { inputs: { ... }, on: { outputName: mockFn } })` to mount components.
+- Query elements via accessible queries: `getByRole`, `getByLabelText`, `getByText`.
+- Simulate user interaction with `userEvent.setup()` + `await user.click()` / `await user.type()`.
+- Verify outputs with `expect(mockFn).toHaveBeenCalledWith(value)`.
+- Call `fixture.detectChanges()` after signal mutations if needed inside tests.
+- Do **not** test implementation details (private signals, internal methods).
+- Every component file (`*.ts`) must have a corresponding `*.spec.ts`.
